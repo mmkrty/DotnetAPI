@@ -59,8 +59,8 @@ public class UserController : ControllerBase
                 "',[LastName] = '" + user.LastName + 
                 "', [Email] = '" + user.Email + 
                 "', [Gender] = '" + user.Gender + 
-                "',[Active]= " + user.Active + 
-            "WHERE [UserId] = " + user.UserId;
+                "',[Active]= '" + user.Active + 
+            "' WHERE [UserId] = " + user.UserId;
     if (_dapper.ExecuteSql(sql))
     {
       return Ok();
@@ -70,7 +70,7 @@ public class UserController : ControllerBase
   }
 
   [HttpPost]
-  public IActionResult AddUser() 
+  public IActionResult AddUser(User user) 
   {
     string sql = @"
       INSERT INTO TutorialAppSchema.Users(
@@ -79,13 +79,19 @@ public class UserController : ControllerBase
         [Email],
         [Gender],
         [Active]
-      ) VALUES (
-        [FirstName],
-        [LastName],
-        [Email],
-        [Gender],
-        [Active]
-      )";
-    return Ok();
+      ) VALUES (" +
+        "'" + user.FirstName + 
+        "', '" + user.LastName + 
+        "', '" + user.Email + 
+        "', '" + user.Gender + 
+        "', '" + user.Active + 
+      "')";
+
+    if(_dapper.ExecuteSql(sql))
+    {
+      return Ok();
+    }
+
+    throw new Exception("Failed to add user");
   }
 }
