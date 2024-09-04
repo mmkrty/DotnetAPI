@@ -49,4 +49,43 @@ public class UserController : ControllerBase
     User user = _dapper.LoadDataSingle<User>(sql);
     return user;
   }
+
+  [HttpPut("EditUser")]
+  public IActionResult EditUser(User user) 
+  {
+    string sql = @"
+          UPDATE TutorialAppSchema.Users
+            SET [FirstName] = '" + user.FirstName + 
+                "',[LastName] = '" + user.LastName + 
+                "', [Email] = '" + user.Email + 
+                "', [Gender] = '" + user.Gender + 
+                "',[Active]= " + user.Active + 
+            "WHERE [UserId] = " + user.UserId;
+    if (_dapper.ExecuteSql(sql))
+    {
+      return Ok();
+    }
+
+    throw new Exception("Failed to update user");
+  }
+
+  [HttpPost]
+  public IActionResult AddUser() 
+  {
+    string sql = @"
+      INSERT INTO TutorialAppSchema.Users(
+        [FirstName],
+        [LastName],
+        [Email],
+        [Gender],
+        [Active]
+      ) VALUES (
+        [FirstName],
+        [LastName],
+        [Email],
+        [Gender],
+        [Active]
+      )";
+    return Ok();
+  }
 }
