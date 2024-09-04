@@ -70,7 +70,7 @@ public class UserController : ControllerBase
   }
 
   [HttpPost]
-  public IActionResult AddUser(User user) 
+  public IActionResult AddUser(UserToAddDto user) 
   {
     string sql = @"
       INSERT INTO TutorialAppSchema.Users(
