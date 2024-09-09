@@ -38,8 +38,6 @@ namespace DotnetAPI.Data
 
       modelBuilder.Entity<UserSalary>()
         .HasKey(u => u.UserId);
-
-      base.OnModelCreating(modelBuilder);
     }
   }
 }
