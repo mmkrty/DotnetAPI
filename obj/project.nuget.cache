@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ZJIqkenLLKI=",
+  "dgSpecHash": "8umS3LGK/7A=",
   "success": true,
   "projectFilePath": "/Users/haochenliu/Documents/practice_projects/csharp/DotnetAPI/DotnetAPI.csproj",
   "expectedPackageFiles": [
@@ -16,9 +16,12 @@
     "/Users/haochenliu/.nuget/packages/microsoft.entityframeworkcore/8.0.8/microsoft.entityframeworkcore.8.0.8.nupkg.sha512",
     "/Users/haochenliu/.nuget/packages/microsoft.entityframeworkcore.abstractions/8.0.8/microsoft.entityframeworkcore.abstractions.8.0.8.nupkg.sha512",
     "/Users/haochenliu/.nuget/packages/microsoft.entityframeworkcore.analyzers/8.0.8/microsoft.entityframeworkcore.analyzers.8.0.8.nupkg.sha512",
+    "/Users/haochenliu/.nuget/packages/microsoft.entityframeworkcore.relational/8.0.8/microsoft.entityframeworkcore.relational.8.0.8.nupkg.sha512",
+    "/Users/haochenliu/.nuget/packages/microsoft.entityframeworkcore.sqlserver/8.0.8/microsoft.entityframeworkcore.sqlserver.8.0.8.nupkg.sha512",
     "/Users/haochenliu/.nuget/packages/microsoft.extensions.apidescription.server/6.0.5/microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "/Users/haochenliu/.nuget/packages/microsoft.extensions.caching.abstractions/8.0.0/microsoft.extensions.caching.abstractions.8.0.0.nupkg.sha512",
     "/Users/haochenliu/.nuget/packages/microsoft.extensions.caching.memory/8.0.0/microsoft.extensions.caching.memory.8.0.0.nupkg.sha512",
+    "/Users/haochenliu/.nuget/packages/microsoft.extensions.configuration.abstractions/8.0.0/microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",
     "/Users/haochenliu/.nuget/packages/microsoft.extensions.dependencyinjection/8.0.0/microsoft.extensions.dependencyinjection.8.0.0.nupkg.sha512",
     "/Users/haochenliu/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/8.0.0/microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
     "/Users/haochenliu/.nuget/packages/microsoft.extensions.logging/8.0.0/microsoft.extensions.logging.8.0.0.nupkg.sha512",
