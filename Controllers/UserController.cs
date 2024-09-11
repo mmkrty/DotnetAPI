@@ -110,4 +110,70 @@ public class UserController : ControllerBase
 
     throw new Exception("Failed to Delete user");
   }
+
+    [HttpGet("GetUserSalary/all")]
+  public IEnumerable<UserSalary> GetUserSalaries()
+  {
+    string sql = @"
+          SELECT [UserId],
+            [Salary]
+          FROM TutorialAppSchema.UserSalary";
+    IEnumerable<UserSalary> userSalaries = _dapper.LoadData<UserSalary>(sql);
+    return userSalaries;
+  }
+
+  [HttpGet("GetUserSalary/{userId}")]
+  public UserSalary GetUserSalary(int userId)
+  {
+    string sql = @"
+          SELECT [UserId],
+            [Salary]
+          FROM TutorialAppSchema.UserSalary
+          WHERE [UserId] = " + userId.ToString();
+    UserSalary userSalary = _dapper.LoadDataSingle<UserSalary>(sql);
+    return userSalary;
+  }
+
+  [HttpPost("UserSalary")]
+  public IActionResult PostUserSalary(UserSalary userSalary)
+  {
+    string sql = @"
+          INSERT INTO TutorialAppSchema.UserSalary ([UserId], [Salary])
+          VALUES (" + userSalary.UserId + ", " + userSalary.Salary + ")";
+    if (_dapper.ExecuteSqlWithRowCount(sql) > 0)
+    {
+      return Ok(userSalary);
+    }
+
+    throw new Exception("Failed to add user salary");
+  }
+
+  [HttpPut("EditUserSalary")]
+  public IActionResult EditUserSalary(UserSalary userSalary) 
+  {
+    string sql = @"
+          UPDATE TutorialAppSchema.UserSalary
+            SET [Salary] = " + userSalary.Salary + 
+            " WHERE [UserId] = " + userSalary.UserId.ToString();
+    if (_dapper.ExecuteSql(sql))
+    {
+      return Ok(userSalary);
+    }
+
+    throw new Exception("Failed to update user salary");
+  }
+
+  [HttpDelete("UserSalary/{userId}")]
+  public IActionResult DeleteUserSalary(int userId)
+  {
+    string sql = @"
+          DELETE FROM TutorialAppSchema.UserSalary
+          WHERE [UserId] = " + userId.ToString();
+    if (_dapper.ExecuteSql(sql))
+    {
+      return Ok();
+    }
+
+    throw new Exception("Failed to delete user salary");
+  }
 }
