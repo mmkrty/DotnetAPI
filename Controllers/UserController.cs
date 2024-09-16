@@ -111,7 +111,7 @@ public class UserController : ControllerBase
     throw new Exception("Failed to Delete user");
   }
 
-    [HttpGet("GetUserSalary/all")]
+  [HttpGet("GetUserSalary/all")]
   public IEnumerable<UserSalary> GetUserSalaries()
   {
     string sql = @"
@@ -184,9 +184,9 @@ public class UserController : ControllerBase
     string sql = @"
           SELECT [UserId],
             [JobTitle],
-            [Department],
+            [Department]
           FROM TutorialAppSchema.UserJobInfo
-          WHERE [UserId] = " + userId;
+          WHERE [UserId] = " + userId.ToString();
 
     IEnumerable<UserJobInfo> userJobInfo = _dapper.LoadData<UserJobInfo>(sql);
     return userJobInfo;
