@@ -13,7 +13,6 @@ public class UserEFController : ControllerBase
   IMapper _mapper;
   public UserEFController(IConfiguration config)
   {
-    Console.WriteLine(config.GetConnectionString("DefaultConnection"));
     _entityFramework = new DataContextEF(config);
     _mapper = new Mapper(new MapperConfiguration(cfg => {
       cfg.CreateMap<UserToAddDto, User>();
