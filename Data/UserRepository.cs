@@ -26,7 +26,7 @@ namespace DotnetAPI.Data
     {
       if(entityToRemove != null)
       {
-        _entityFramework.Remove(entityToRemove)
+        _entityFramework.Remove(entityToRemove);
       }
     }
   }
