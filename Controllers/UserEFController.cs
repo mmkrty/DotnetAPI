@@ -10,10 +10,13 @@ namespace DotnetAPI.Controllers;
 public class UserEFController : ControllerBase
 {
   DataContextEF _entityFramework;
+  IUserRepository _userRepository;
   IMapper _mapper;
-  public UserEFController(IConfiguration config)
+
+  public UserEFController(IConfiguration config, IUserRepository userRepository)
   {
     _entityFramework = new DataContextEF(config);
+    _userRepository = userRepository;
     _mapper = new Mapper(new MapperConfiguration(cfg => {
       cfg.CreateMap<UserToAddDto, User>();
     }));
