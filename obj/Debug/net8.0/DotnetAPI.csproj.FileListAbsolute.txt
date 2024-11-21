@@ -74,3 +74,4 @@
 /Users/haochenliu/Documents/practice_projects/csharp/DotnetAPI/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Abstractions.dll
 /Users/haochenliu/Documents/practice_projects/csharp/DotnetAPI/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Relational.dll
 /Users/haochenliu/Documents/practice_projects/csharp/DotnetAPI/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.SqlServer.dll
+/Users/haochenliu/Documents/practice_projects/csharp/DotnetAPI/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
