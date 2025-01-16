@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "wuGgDujHHSU=",
+  "dgSpecHash": "7QRRdIqyWGU=",
   "success": true,
   "projectFilePath": "/Users/haochenliu/Documents/practice_projects/csharp/DotnetAPI/DotnetAPI.csproj",
   "expectedPackageFiles": [
@@ -55,7 +55,10 @@
     "/Users/haochenliu/.nuget/packages/system.security.cryptography.protecteddata/8.0.0/system.security.cryptography.protecteddata.8.0.0.nupkg.sha512",
     "/Users/haochenliu/.nuget/packages/system.text.encodings.web/4.7.2/system.text.encodings.web.4.7.2.nupkg.sha512",
     "/Users/haochenliu/.nuget/packages/system.text.json/4.7.2/system.text.json.4.7.2.nupkg.sha512",
-    "/Users/haochenliu/.nuget/packages/system.threading.tasks.extensions/4.5.4/system.threading.tasks.extensions.4.5.4.nupkg.sha512"
+    "/Users/haochenliu/.nuget/packages/system.threading.tasks.extensions/4.5.4/system.threading.tasks.extensions.4.5.4.nupkg.sha512",
+    "/Users/haochenliu/.nuget/packages/microsoft.netcore.app.ref/8.0.12/microsoft.netcore.app.ref.8.0.12.nupkg.sha512",
+    "/Users/haochenliu/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.12/microsoft.aspnetcore.app.ref.8.0.12.nupkg.sha512",
+    "/Users/haochenliu/.nuget/packages/microsoft.netcore.app.host.osx-arm64/8.0.12/microsoft.netcore.app.host.osx-arm64.8.0.12.nupkg.sha512"
   ],
   "logs": []
 }

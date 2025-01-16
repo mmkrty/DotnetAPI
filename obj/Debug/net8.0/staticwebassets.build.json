@@ -1,11 +1,12 @@
 {
   "Version": 1,
-  "Hash": "go66/KfeSQIwuA2fwPMC3WnfB9yLb8Nekdys4fTWFUA=",
+  "Hash": "ImgqJO9RWmDoTEBjcslgADkKKCwiB9389q2Q1P8y+aM=",
   "Source": "DotnetAPI",
   "BasePath": "_content/DotnetAPI",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": []
+  "Assets": [],
+  "Endpoints": []
 }
