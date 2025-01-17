@@ -41,49 +41,26 @@ public class UserCompleteController : ControllerBase
     return users;
   }
 
-  [HttpPut("EditUser")]
-  public IActionResult EditUser(User user) 
+  [HttpPut("UpsertUser")]
+  public IActionResult EditUser(UserComplete user) 
   {
-    string sql = @"
-          UPDATE TutorialAppSchema.Users
-            SET [FirstName] = '" + user.FirstName + 
-                "',[LastName] = '" + user.LastName + 
-                "', [Email] = '" + user.Email + 
-                "', [Gender] = '" + user.Gender + 
-                "',[Active]= '" + user.Active + 
-            "' WHERE [UserId] = " + user.UserId;
+    string sql = @" TutorialAppSchema.spUser_Upsert
+            @FirstName = '" + user.FirstName + 
+            "', @LastName = '" + user.LastName + 
+            "', @Email = '" + user.Email + 
+            "', @Gender = '" + user.Gender + 
+            "', @Active= '" + user.Active + 
+            "', @JobTitle= '" + user.JobTitle + 
+            "', @Department= '" + user.Department + 
+            "', @Salary= '" + user.Salary + 
+            "', @UserId = " + user.UserId;
+
     if (_dapper.ExecuteSql(sql))
     {
       return Ok();
     }
 
     throw new Exception("Failed to update user");
-  }
-
-  [HttpPost]
-  public IActionResult AddUser(UserToAddDto user) 
-  {
-    string sql = @"
-      INSERT INTO TutorialAppSchema.Users(
-        [FirstName],
-        [LastName],
-        [Email],
-        [Gender],
-        [Active]
-      ) VALUES (" +
-        "'" + user.FirstName + 
-        "', '" + user.LastName + 
-        "', '" + user.Email + 
-        "', '" + user.Gender + 
-        "', '" + user.Active + 
-      "')";
-
-    if(_dapper.ExecuteSql(sql))
-    {
-      return Ok();
-    }
-
-    throw new Exception("Failed to add user");
   }
 
   [HttpDelete("DeleteUser/{userId}")]
@@ -111,35 +88,6 @@ public class UserCompleteController : ControllerBase
     return userSalaries;
   }
 
-  [HttpPost("UserSalary")]
-  public IActionResult PostUserSalary(UserSalary userSalary)
-  {
-    string sql = @"
-          INSERT INTO TutorialAppSchema.UserSalary ([UserId], [Salary])
-          VALUES (" + userSalary.UserId + ", " + userSalary.Salary + ")";
-    if (_dapper.ExecuteSqlWithRowCount(sql) > 0)
-    {
-      return Ok(userSalary);
-    }
-
-    throw new Exception("Failed to add user salary");
-  }
-
-  [HttpPut("EditUserSalary")]
-  public IActionResult EditUserSalary(UserSalary userSalary) 
-  {
-    string sql = @"
-          UPDATE TutorialAppSchema.UserSalary
-            SET [Salary] = " + userSalary.Salary + 
-            " WHERE [UserId] = " + userSalary.UserId;
-    if (_dapper.ExecuteSql(sql))
-    {
-      return Ok(userSalary);
-    }
-
-    throw new Exception("Failed to update user salary");
-  }
-
   [HttpDelete("UserSalary/{userId}")]
   public IActionResult DeleteUserSalary(int userId)
   {
@@ -153,44 +101,6 @@ public class UserCompleteController : ControllerBase
     }
 
     throw new Exception("Failed to delete user salary");
-  }
-
-  [HttpPost("UserJobInfo")]
-  public IActionResult PostUserJobInfo(UserJobInfo userJobInfoForInsert)
-  {
-    string sql = @"
-          INSERT INTO TutorialAppSchema.UserJobInfo (
-              [UserId], 
-              [JobTitle], 
-              [Department]
-          ) VALUES (" + userJobInfoForInsert.UserId 
-               + ", '" + userJobInfoForInsert.JobTitle 
-               + "', '" + userJobInfoForInsert.Department 
-               + "')";
-    if (_dapper.ExecuteSql(sql))
-    {
-      return Ok(userJobInfoForInsert);
-    }
-    throw new Exception("Adding user job info failed on save");
-  }
-
-  [HttpPut("EditUserJobInfo")]
-  public IActionResult PutUserJobInfo(UserJobInfo userJobInfoForUpdate)
-  {
-    string sql = @"
-          UPDATE TutorialAppSchema.UserJobInfo
-          SET [JobTitle] = '" 
-            + userJobInfoForUpdate.JobTitle 
-            + "', [Department] = '" 
-            + userJobInfoForUpdate.Department 
-            + "' WHERE [UserId] = " 
-            + userJobInfoForUpdate.UserId;
-    
-    if (_dapper.ExecuteSql(sql))
-    {
-      return Ok(userJobInfoForUpdate);
-    }
-    throw new Exception("Updating user job info failed on save");
   }
 
   [HttpDelete("UserJobInfo/{userId}")]
