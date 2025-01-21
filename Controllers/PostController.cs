@@ -19,7 +19,7 @@ namespace DotnetAPI.Controllers
     }
 
     [HttpGet("Posts/{postId}/{userId}/{searchParam}")]
-    public IEnumerable<Post> GetPosts(int postId, int userId, string searchParam = "None")
+    public IEnumerable<Post> GetPosts(int postId = 0, int userId = 0, string searchParam = "None")
     {
       string sql = @"EXEC TutorialAppSchema.spPosts_Get";
       string parameters = "";
