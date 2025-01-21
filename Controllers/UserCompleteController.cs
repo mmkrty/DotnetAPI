@@ -44,7 +44,7 @@ public class UserCompleteController : ControllerBase
   [HttpPut("UpsertUser")]
   public IActionResult EditUser(UserComplete user) 
   {
-    string sql = @" TutorialAppSchema.spUser_Upsert
+    string sql = @"EXEC TutorialAppSchema.spUser_Upsert
             @FirstName = '" + user.FirstName + 
             "', @LastName = '" + user.LastName + 
             "', @Email = '" + user.Email + 
@@ -66,7 +66,7 @@ public class UserCompleteController : ControllerBase
   [HttpDelete("DeleteUser/{userId}")]
   public IActionResult DeleteUser(int userId)
   {
-    string sql = @"TutorialAppSchema.spUser_Delete 
+    string sql = @"EXEC TutorialAppSchema.spUser_Delete 
             @UserId = " + userId.ToString();
 
     if(_dapper.ExecuteSql(sql))
