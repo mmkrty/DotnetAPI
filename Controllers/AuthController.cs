@@ -40,34 +40,13 @@ namespace DotnetAPI.Controllers
 
         if(existingUsers.Count() == 0)
         {
-          byte[] passwordSalt = new byte[128 /8];
-          using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
+          UserForLoginDto userForSetPassword = new UserForLoginDto()
           {
-            rng.GetNonZeroBytes(passwordSalt);
-          }
-          
-          byte[] passwordHash = _authHelper.GetPasswordHash(userForRegistration.Password, passwordSalt);
+            Email = userForRegistration.Email,
+            Password = userForRegistration.Password
+          };
 
-          string sqlAddAuth = @"EXEC TutorialAppSchema.spRegistration_Upsert
-              @Email = @EmailParam, 
-              @PasswordHash = @PasswordHashParam, 
-              @PasswordSalt = @PasswordSaltParam";
-          
-          List<SqlParameter> sqlParameters = new List<SqlParameter>();
-
-          SqlParameter emailParameter = new SqlParameter("@EmailParam", SqlDbType.VarChar);
-          emailParameter.Value = userForRegistration.Email;
-          sqlParameters.Add(emailParameter);
-
-          SqlParameter passwordHashParameter = new SqlParameter("@PasswordHashParam", SqlDbType.VarBinary);
-          passwordHashParameter.Value = passwordHash;
-          sqlParameters.Add(passwordHashParameter);
-
-          SqlParameter passwordSaltParameter = new SqlParameter("@PasswordSaltParam", SqlDbType.VarBinary);
-          passwordSaltParameter.Value = passwordSalt;
-          sqlParameters.Add(passwordSaltParameter);
-
-          if(_dapper.ExecuteSqlWithParameters(sqlAddAuth, sqlParameters))
+          if(_authHelper.SetPassword(userForSetPassword))
           {
 
             string sqlAddUser = @"EXEC TutorialAppSchema.spUser_Upsert
@@ -92,6 +71,16 @@ namespace DotnetAPI.Controllers
           throw new Exception("User with this email already exists");
       }
       throw new Exception("Passwords do not match");
+    }
+
+    [HttpPut("ResetPassword")]
+    public IActionResult ResetPassword(UserForLoginDto userForSetPassword)
+    {
+      if(_authHelper.SetPassword(userForSetPassword))
+      {
+        return Ok();
+      }
+      throw new Exception("Failed to update password!");
     }
 
     [AllowAnonymous]
