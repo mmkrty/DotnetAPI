@@ -9,6 +9,10 @@ namespace DotnetAPI.Dtos
     public string LastName { get; set; }
     public string Gender { get; set; }
 
+    public string JobTitle { get; set; }
+    public string Department { get; set; }
+    public decimal Salary { get; set; }
+
     public UserForRegistrationDto()
     {
       Email = Email ?? "";
@@ -17,6 +21,8 @@ namespace DotnetAPI.Dtos
       FirstName = FirstName ?? "";
       LastName = LastName ?? "";
       Gender = Gender ?? "";
+      JobTitle = JobTitle ?? "";
+      Department = Department ?? "";
     }
   }
 }

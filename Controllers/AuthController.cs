@@ -48,39 +48,37 @@ namespace DotnetAPI.Controllers
           
           byte[] passwordHash = _authHelper.GetPasswordHash(userForRegistration.Password, passwordSalt);
 
-          string sqlAddAuth = @"INSERT INTO TutorialAppSchema.Auth ([Email],
-            [PasswordHash],
-            [PasswordSalt]
-            ) VALUES ('" + userForRegistration.Email + 
-            "', @PasswordHash, @PasswordSalt)";
+          string sqlAddAuth = @"EXEC TutorialAppSchema.spRegistration_Upsert
+              @Email = @EmailParam, 
+              @PasswordHash = @PasswordHashParam, 
+              @PasswordSalt = @PasswordSaltParam";
           
           List<SqlParameter> sqlParameters = new List<SqlParameter>();
 
-          SqlParameter passwordSaltParameter = new SqlParameter("@PasswordSalt", SqlDbType.VarBinary);
-          passwordSaltParameter.Value = passwordSalt;
+          SqlParameter emailParameter = new SqlParameter("@EmailParam", SqlDbType.VarChar);
+          emailParameter.Value = userForRegistration.Email;
+          sqlParameters.Add(emailParameter);
 
-          SqlParameter passwordHashParameter = new SqlParameter("@PasswordHash", SqlDbType.VarBinary);
+          SqlParameter passwordHashParameter = new SqlParameter("@PasswordHashParam", SqlDbType.VarBinary);
           passwordHashParameter.Value = passwordHash;
-
-          sqlParameters.Add(passwordSaltParameter);
           sqlParameters.Add(passwordHashParameter);
+
+          SqlParameter passwordSaltParameter = new SqlParameter("@PasswordSaltParam", SqlDbType.VarBinary);
+          passwordSaltParameter.Value = passwordSalt;
+          sqlParameters.Add(passwordSaltParameter);
 
           if(_dapper.ExecuteSqlWithParameters(sqlAddAuth, sqlParameters))
           {
 
-            string sqlAddUser = @"
-              INSERT INTO TutorialAppSchema.Users(
-                [FirstName],
-                [LastName],
-                [Email],
-                [Gender],
-                [Active]
-              ) VALUES (" +
-                "'" + userForRegistration.FirstName + 
-                "', '" + userForRegistration.LastName + 
-                "', '" + userForRegistration.Email + 
-                "', '" + userForRegistration.Gender + 
-                "', 1)";
+            string sqlAddUser = @"EXEC TutorialAppSchema.spUser_Upsert
+                @FirstName = '" + userForRegistration.FirstName + 
+                "', @LastName = '" + userForRegistration.LastName + 
+                "', @Email = '" + userForRegistration.Email + 
+                "', @Gender = '" + userForRegistration.Gender + 
+                "', @Active = 1" + 
+                ", @JobTitle = '" + userForRegistration.JobTitle + 
+                "', @Department = '" + userForRegistration.Department + 
+                "', @Salary= '" + userForRegistration.Salary + "'";
 
             if (_dapper.ExecuteSql(sqlAddUser))
             {
